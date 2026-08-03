@@ -1,0 +1,51 @@
+services:
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 200
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - internal
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    read_only: true
+    tmpfs:
+      - /tmp
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 100
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: mongodb://mongo:27017/online-survey
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: 7d
+      CLIENT_URL: ${CLIENT_URL:-http://localhost}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_NAME: ${ADMIN_NAME:-Admin}
+    ports:
+      - "7481:5000"
+    depends_on:
+      - mongo
+    networks:
+      - internal
+
+networks:
+  internal:
+
+volumes:
+  mongo-data:

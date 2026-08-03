@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@import "@fontsource-variable/vazirmatn";
+
+@theme {
+  --color-brand-50: #f4f8e9;
+  --color-brand-100: #e6efc9;
+  --color-brand-200: #d0e299;
+  --color-brand-300: #b0c534;
+  --color-brand-400: #97c94f;
+  --color-brand-500: #78be41;
+  --color-brand-600: #5da23a;
+  --color-brand-700: #467a49;
+  --color-brand-800: #386052;
+  --color-brand-900: #2f4c40;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Vazirmatn Variable', 'Tahoma', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--color-slate-800);
+  background: var(--color-slate-50);
+}
+
+::selection {
+  background: var(--color-brand-200);
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-slate-200/80 rounded-xl shadow-[0_1px_2px_rgba(15,23,42,0.04),0_8px_24px_-12px_rgba(15,23,42,0.08)];
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-br from-brand-400 to-brand-700 px-4 py-2 text-sm font-medium text-white shadow-sm shadow-brand-700/30 transition hover:shadow-md hover:brightness-105 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:border-slate-400 active:scale-[0.98] disabled:opacity-50;
+  }
+
+  .btn-danger-ghost {
+    @apply inline-flex items-center justify-center gap-1 rounded-lg px-2.5 py-1 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:opacity-50;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-1 rounded-lg px-2.5 py-1 text-sm font-medium text-brand-700 transition hover:bg-brand-50;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15;
+  }
+
+  .label-field {
+    @apply block text-xs font-medium text-slate-500 mb-1.5;
+  }
+
+  .section-title {
+    @apply text-sm font-semibold text-slate-800 tracking-tight;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium;
+  }
+
+  .icon-badge {
+    @apply w-7 h-7 rounded-lg bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-sm shadow-brand-700/25 flex items-center justify-center text-sm shrink-0;
+  }
+}
